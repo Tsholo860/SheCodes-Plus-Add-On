@@ -23,6 +23,10 @@ turkeyTime.innerHTML = turkeyTimezone.format("h:mm:ss [<small>]A[</small>]");
 function updateCity(event){
     
     let citiesTimeZone = event.target.value;
+    if(citiesTimeZone === "current"){
+        citiesTimeZone = moment.tz.guess();
+
+    }
     let cityName = citiesTimeZone.replace("_"," ").split("/")[1];
     let time =moment().tz(citiesTimeZone);
     let citiesElement = document.querySelector("#cities");
@@ -34,7 +38,7 @@ function updateCity(event){
             </div>
             
             
-            <div class="time">${time.format('h:mm:ss')}<small>${time.format('A')}</small></div>
+            <div class="time">${time.format('h:mm:ss')} <small>${time.format('A')}</small></div>
         </div>`
 
 
