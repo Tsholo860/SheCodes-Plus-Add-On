@@ -19,5 +19,29 @@ let turkeyTimezone = moment().tz("Europe/Istanbul");
 turkeyDate.innerHTML = turkeyTimezone.format("MMMM,Do,YYYY ");
 turkeyTime.innerHTML = turkeyTimezone.format("h:mm:ss [<small>]A[</small>]");
 }
-dateandTimeUpdate()
-setInterval(dateandTimeUpdate,100);
+
+function updateCity(event){
+    
+    let citiesTimeZone = event.target.value;
+    let cityName = citiesTimeZone.replace("_"," ").split("/")[1];
+    let time =moment().tz(citiesTimeZone);
+    let citiesElement = document.querySelector("#cities");
+    citiesElement.innerHTML =`
+            <div class="city">
+            <div>
+                <h2>${cityName}</h2>
+                <div class="date">${time.format("MMMM Do YYYY")}</div>
+            </div>
+            
+            
+            <div class="time">${time.format('h:mm:ss')}<small>${time.format('A')}</small></div>
+        </div>`
+
+
+
+}
+dateandTimeUpdate();
+setInterval(dateandTimeUpdate,100);  
+
+let citiesSelect = document.querySelector("#city");
+citiesSelect.addEventListener("change",updateCity);
